@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -18,3 +19,20 @@ def signupfunc(request):
 
 
     return render(request, 'singup.html', {'some':100})
+
+def loginfunc(request):
+    if request.method == "POST":
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, username=username, email=email, password=password)
+        if user is not None:
+            logint(request, user)
+            return render(request, 'login.html', {'context':'ログインできた'})
+
+        else:
+            return render(request, 'login.html', {'context':'ログインできなかった'})
+        pass
+
+def listfunc(request):
+    return render(request, 'list.html', {})
