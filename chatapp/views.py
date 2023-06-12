@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.contrib.auth import authenticate, login
+from .models import ChatModel
 
 # Create your views here.
 
@@ -32,7 +33,7 @@ def loginfunc(request):
 
         else:
             return render(request, 'login.html', {'context':'ログインできなかった'})
-        pass
 
 def listfunc(request):
-    return render(request, 'list.html', {})
+    object_list = ChatModel.objects.all()
+    return render(request, 'list.html', {'object_list':object_list})
