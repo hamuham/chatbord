@@ -125,3 +125,5 @@ STATICFILES_DIRS = [str(BASE_DIR / 'static')]
 MEDIA_URL = 'mediamedia/'
 
 MEDIA_ROOT = BASE_DIR / 'media'
+
+LOGIN_URL = 'login' #urlsに対応したname
