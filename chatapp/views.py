@@ -47,3 +47,10 @@ def logoutfunc(request):
 def detailfunc(request, pk):
     object = get_object_or_404(ChatModel, pk=pk)
     return render(request, 'detail.html', {'object':object})
+
+def goodfunc(request, pk):
+    # object = get_object_or_404(ChatModel, pk=pk) こちらの記述が一般的
+    object = ChatModel.objects.get(pk=pk)
+    object.good = object.good + 1
+    object.save()
+    return redirect('list')
