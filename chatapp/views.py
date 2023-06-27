@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from .models import ChatModel
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.views.generic import CreateView
+from django.urls import reverse_lazy
 
 # Create your views here.
 
@@ -54,3 +56,20 @@ def goodfunc(request, pk):
     object.good = object.good + 1
     object.save()
     return redirect('list')
+
+def readfunc(request, pk):
+    object = ChatModel.objects.get(pk=pk)
+    username = request.user.get_username()
+    if username in object.readtext:
+        return redirect('list')
+    else:
+        object.read = object.read + 1
+        object.readtext = object.readtext + ' ' + username
+        object.save()
+        return redirect('list')
+
+class ChatCreate(CreateView):
+    template_name = 'create.html'
+    model = ChatModel
+    fields = ('title', 'content', 'author', 'snsimage')
+    success_url = reverse_lazy('list')

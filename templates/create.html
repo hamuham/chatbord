@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="alert alert-primary" role="alert">
+    <h3>Create</h3>
+</div>
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="title" class="form-label">タイトル:</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">内容:</label>
+            <input type="text" class="form-control" id="content" name="content">
+        </div>
+        <div class="mb-3">
+            <label for="snsimage" class="form-label">画像:</label>
+            <div class="input-group">
+                <input type="file" class="visually-hidden d-none" id="snsimage" name="snsimage">
+                <label for="snsimage" class="input-group-text">ファイルを選択</label>
+            </div>
+        </div>
+        <input type="hidden" name="author" value="{{ user.username }}">
+        <button type="submit" class="btn btn-primary">送信</button>
+    </form>
+</div>
+{% else %}
+<p>ログインしてください。</p>
+{% endif %}
+{% endblock %}

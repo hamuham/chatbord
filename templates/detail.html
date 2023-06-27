@@ -14,7 +14,7 @@
                     <p>投稿者:{{ object.author }}</p>
                     <p><img src="{{ object.snsimage.url }}" width="300px"></p>
                     <a href="{% url 'good' object.pk %}" class="btn btn-primary disabled"  role="button" aria-pressed="true">いいね{{item.good}}件</a>
-                    <a href="#" class="btn btn-secondary disabled" role="button" aria-pressed="true">既読{{item.read}}人</a>
+                    <a href="{% url 'read' object.pk %}" class="btn btn-secondary disabled" role="button" aria-pressed="true">既読{{item.read}}人</a>
                 </div>
             <a href="{% url 'logout' %}">ログアウト</a>
         </div>
