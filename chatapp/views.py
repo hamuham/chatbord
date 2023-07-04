@@ -17,7 +17,7 @@ def signupfunc(request):
         username = request.POST['username']
         password = request.POST['password']
         try:
-            user = User.objects.create_user(username, password)
+            user = User.objects.create_user(username, '', password)
         except IntegrityError:
             return render(request, 'singup.html', {'error':'このユーザーは登録されています'})
 
