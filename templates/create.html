@@ -9,6 +9,7 @@
 {% block content %}
 {% if user.is_authenticated %}
 <div class="container">
+    <a href="/list" class="btn btn-primary mb-2" role="button" aria-pressed="true">リストに戻る</a>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
